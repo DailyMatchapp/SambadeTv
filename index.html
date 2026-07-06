@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>TAGADIRT TV - Stream Player</title>
-        <link rel="icon" type="image/png" href="https://i.ibb.co/nNcyhyhC/Picsart-26-07-05-22-41-36-734.png">
+    <link rel="icon" type="image/png" href="https://i.ibb.co/nNcyhyhC/Picsart-26-07-05-22-41-36-734.png">
     <!-- الخطوط والأيقونات -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
@@ -24,14 +24,16 @@
             --hover-bg: #22222a;
         }
 
-        body {
+        html, body {
             margin: 0;
             padding: 0;
-            font-family: 'Tajawal', sans-serif;
+            width: 100%;
+            height: 100%;
             background-color: var(--bg);
             color: var(--text);
+            font-family: 'Tajawal', sans-serif;
             -webkit-tap-highlight-color: transparent;
-            overflow: hidden; /* يمنع تمدد الشاشة بالكامل */
+            overflow: hidden; /* يمنع التمرير الخارجي العشوائي على الكمبيوتر */
         }
 
         /* الحاوية الأساسية للصفحة لتنظيم الهيكل مع الفوتر */
@@ -39,7 +41,7 @@
             display: flex;
             flex-direction: column;
             width: 100vw;
-            height: 100vh;
+            height: 100vh; /* فرض الارتفاع الكامل للشاشة */
             overflow: hidden;
         }
 
@@ -50,7 +52,7 @@
             flex: 1;
             height: 100%;
             background: var(--bg);
-            overflow: hidden; /* يمنع التمرير الخارجي للمشغل والقاومة */
+            overflow: hidden; /* يمنع التمرير الخارجي للمشغل والقائمة على الكمبيوتر */
         }
 
         /* منطقة مشغل الفيديو */
@@ -66,6 +68,11 @@
             height: 100%;
         }
 
+        /* كود مخصص لجعل الفيديو يملأ شاشة المشغل بالكامل */
+        #artplayer-container video {
+            object-fit: fill !important;
+        }
+
         /* منطقة القنوات الجانبية */
         .sidebar-section {
             flex: 1;
@@ -73,7 +80,7 @@
             min-width: 300px;
             height: 100%;
             background: #111113;
-            border-right: 1px solid var(--border);
+            border-left: 1px solid var(--border);
             display: flex;
             flex-direction: column;
             overflow: hidden; /* يمنع تمرير الحاوية بأكملها ويجبر قائمة القنوات على التمرير بشكل مستقل */
@@ -256,6 +263,7 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
+            padding-bottom: 20px; /* مسافة أمان سفلي تمنع اختفاء العناصر */
         }
 
         /* بطاقة القناة */
@@ -336,7 +344,7 @@
             border-color: #ff4d4d;
         }
 
-        /* فوتر احترافي (يتم إخفاؤه من الشاشة الرئيسية ويظهر فقط عند سحب القائمة لأسفل) */
+        /* فوتر احترافي */
         .main-footer {
             background: #09090b;
             border-top: 1px solid var(--border);
@@ -382,41 +390,54 @@
             }
         }
 
-        /* استجابة الشاشات الصغيرة وتوزيعها عمودياً وثبات المشغل بالأعلى */
+        /* استجابة الشاشات الصغيرة وتفعيل التمرير الكامل للمتصفح لمنع قطع الفوتر */
         @media (max-width: 768px) {
+            html, body {
+                overflow-y: auto; /* تمكين التمرير الطبيعي لمتصفح الهاتف */
+                height: auto;
+            }
             .app-container {
-                height: 100vh; /* فرض مساحة الشاشة بالكامل لمنع التمدد */
-                overflow: hidden;
+                height: auto;
+                overflow: visible;
             }
             .main-layout {
                 flex-direction: column; /* المشغل بالأعلى والقنوات بالأسفل للهواتف */
-                height: 100%;
-                overflow: hidden;
+                height: auto;
+                overflow: visible;
             }
             .player-section {
                 width: 100%;
-                height: 210px; /* تصغير حجم المشغل بشكل ثابت ومناسب */
-                flex: none; /* يمنع تمدد المشغل كلياً على حساب قائمة القنوات */
+                height: auto;
+                aspect-ratio: 16 / 9; /* الحفاظ على نسبة عرض مثالية للمشغل */
+                position: sticky; /* يظل المشغل معلقاً بالأعلى أثناء النزول لتصفح القنوات */
+                top: 0;
+                z-index: 1000;
+                background: #000;
+                flex: none;
             }
             .sidebar-section {
                 width: 100%;
                 max-width: none;
                 min-width: none;
-                flex: 1; /* يشغل المساحة المتبقية بالكامل أسفل المشغل */
-                border-right: none;
+                height: auto;
+                border-left: none;
                 border-top: 1px solid var(--border);
-                overflow: hidden; /* يمنع تمرير السايدبار بأكمله */
+                overflow: visible;
                 display: flex;
                 flex-direction: column;
             }
+            .sidebar-scrollable {
+                overflow-y: visible; /* تعطيل التمرير الداخلي والاعتماد على تمرير الصفحة الأساسي */
+                height: auto;
+            }
             .sidebar-header {
-                padding: 12px 15px; /* تصغير هيدر القائمة قليلاً على الهواتف */
+                padding: 12px 15px;
             }
             .control-panel {
-                padding: 8px 15px; /* تقليص مساحة لوحة التحكم على الهواتف */
+                padding: 8px 15px;
             }
             .channel-item span {
-                padding-left: 65px; /* تظل المساحة محجوزة على الهاتف دائماً للأزرار */
+                padding-left: 65px;
             }
             .channel-actions {
                 display: flex;
@@ -512,76 +533,97 @@
     </div>
 
     <script>
-        // مصفوفة القنوات الافتراضية الثابتة
+        // مصفوفة القنوات الافتراضية الثابتة (معدلة بقنوات HTTPS داعمة لـ CORS في الأعلى لضمان التشغيل الفوري)
         const defaultChannels = [
             { 
-                name: "beIN SPORTS MAX 1", 
+                name: "أبوظبي الرياضية 1 [HTTPS]", 
+                logo: "https://i.imgur.com/lKl2wZH.png",
+                sources: [
+                    { label: "HD (1080p)", url: "https://admdn1.cdn.mangomolo.com/adsports1/smil:adsports1.stream.smil/playlist.m3u8" }
+                ]
+            },
+            { 
+                name: "أبوظبي الرياضية 2 [HTTPS]", 
+                logo: "https://i.imgur.com/9q8gFsq.png",
+                sources: [
+                    { label: "HD (1080p)", url: "https://admdn5.cdn.mangomolo.com/adsports2/smil:adsports2.stream.smil/playlist.m3u8" }
+                ]
+            },
+            { 
+                name: "الجزيرة الإخبارية [HTTPS]", 
+                logo: "https://i.imgur.com/x9TQYI3.jpg",
+                sources: [
+                    { label: "HD (1080p)", url: "https://live-hls-web-aja.getaj.net/AJA/index.m3u8" }
+                ]
+            },
+            { 
+                name: "beIN SPORTS MAX 1 [HTTP]", 
                 logo: "https://assets.bein.com/mena/sites/3/2015/06/beIN_SPORTS_MAX1_DIGITAL_Mono.png",
                 sources: [
-                { label: "244p (LQ)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/105644.m3u8" },
-                { label: "360p (SD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85865.m3u8" },
-                 { label: "720p (HD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85866.m3u8" },                
-                 { label: "1080p (FHD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85867.m3u8" }
+                    { label: "244p (LQ)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/105644.m3u8" },
+                    { label: "360p (SD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85865.m3u8" },
+                    { label: "720p (HD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85866.m3u8" },                
+                    { label: "1080p (FHD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85867.m3u8" }
                 ]
             },
             { 
-                name: "beIN SPORTS MAX 2", 
+                name: "beIN SPORTS MAX 2 [HTTP]", 
                 logo: "https://assets.bein.com/mena/sites/3/2015/06/beIN_SPORTS_MAX2_DIGITAL_Mono.png",
                 sources: [
-                { label: "244p (LQ)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/105645.m3u8" },
-                { label: "360p (SD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85868.m3u8" },
-                { label: "720p (HD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85869.m3u8" },
-                { label: "1080p (FHD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85870.m3u8" }
+                    { label: "244p (LQ)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/105645.m3u8" },
+                    { label: "360p (SD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85868.m3u8" },
+                    { label: "720p (HD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85869.m3u8" },
+                    { label: "1080p (FHD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85870.m3u8" }
                 ]
             },
             { 
-                name: "beIN SPORTS MAX 3", 
+                name: "beIN SPORTS MAX 3 [HTTP]", 
                 logo: "https://assets.bein.com/mena/sites/3/2015/06/beIN_SPORTS_MAX3_DIGITAL_Mono.png",
                 sources: [
-                { label: "360p (SD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85871.m3u8" },     
-                { label: "720p (HD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85872.m3u8" },
-                { label: "1080p (FHD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85873.m3u8" }                                        
+                    { label: "360p (SD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85871.m3u8" },     
+                    { label: "720p (HD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85872.m3u8" },
+                    { label: "1080p (FHD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85873.m3u8" }                                        
                 ]
             },
             { 
-                name: "beIN SPORTS MAX 4", 
+                name: "beIN SPORTS MAX 4 [HTTP]", 
                 logo: "https://assets.bein.com/mena/sites/4/2015/06/beIN_SPORTS_MAX4_DIGITAL_Mono.png",
                 sources: [                
-                { label: "360p (SD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85874.m3u8" },     
-                { label: "720p (HD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85875.m3u8" },             
-                { label: "1080p (FHD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85876.m3u8" }                    
+                    { label: "360p (SD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85874.m3u8" },     
+                    { label: "720p (HD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85875.m3u8" },             
+                    { label: "1080p (FHD)", url: "http://auziatv.com:8080/live/fawzi2026/fawzi2026/85876.m3u8" }                    
                 ]
             },
             { 
-                name: "FOX LIVE HD", 
+                name: "FOX LIVE HD [HTTP]", 
                 logo: "https://i.ibb.co/CpbVq2rS/334102.png",
                 sources: [
                     { label: "720p (HD)", url: "http://84.17.50.102/fox/index.m3u8" }
                 ]
             },
             { 
-                name: "SPORTS-DIGITAL", 
+                name: "SPORTS-DIGITAL [HTTPS]", 
                 logo: "https://imgs.search.brave.com/cVskO1jhA9uE81ItThYCJluaUFs3knAtgS2rPB480u4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy85/LzkzL1Nwb3J0ZGln/aXRhbF9GdSVDMyU5/RmJhbGxfTG9nb18y/MDE5LnN2Zw",
                 sources: [
                     { label: "720p (HD)", url: "https://edge22.776740.ir.cdn.ir/hls2/sport.m3u8" }
                 ]
             },
             { 
-                name: "BEIN FRANCE 1", 
+                name: "BEIN FRANCE 1 [HTTPS]", 
                 logo: "https://assets.bein.com/mena/sites/3/2015/06/beIN_SPORTS1_DIGITAL_Mono.png",
                 sources: [
                     { label: "720p (HD)", url: "https://1nyaler.streamhostingcdn.top/stream/23/index.m3u8" }
                 ]
             },
             { 
-                name: "FAST SPORT", 
+                name: "FAST SPORT [HTTP]", 
                 logo: "https://i.ibb.co/nNcyhyhC/Picsart-26-07-05-22-41-36-734.png",
                 sources: [
                     { label: "720p (HD)", url: "http://sewv654wfcsdwfi87fwvgbngh.siauliairsavlt.pw/iptv/MMMNMXMBCGWMZQ/15507/index.m3u8" }
                 ]
             },
             { 
-                name: "M6 HD", 
+                name: "M6 HD [HTTP]", 
                 logo: "https://i.ibb.co/B5x2b2wT/m62.png",
                 sources: [
                     { label: "720p (HD)", url: "http://84.17.50.102/m6/index.m3u8" }
@@ -703,7 +745,7 @@
                 isLive: isM3u8,
                 autoplay: true,
                 pip: true,
-                autoMini: true,
+                autoMini: false,  /* تم إيقاف الميزة لتجنب ظهور المشغل الدائري الصغير عند النزول لأسفل */
                 setting: true,
                 playbackRate: true,
                 aspectRatio: true,
