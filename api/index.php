@@ -87,7 +87,6 @@
   
   
   /* --- Filters Bar Styling (أفقية في المنتصف) --- */
- /* --- Filters Bar Styling (أفقية في المنتصف) --- */
     .filter-bar-wrapper {
         text-align: center; 
         margin-bottom: 2rem;
@@ -226,24 +225,16 @@
         cursor: pointer;
     }
   
-  
   /* تنسيق عنوان الدوري في شريط المباراة */
 .card-league-header {
-    /* يمكنك استخدام لون ثابت، مثل #FFD700 (ذهبي)، أو استخدام متغير */
     color: var(--primary-color); /* استخدم لونك الأساسي */
-    
-    /* إذا أردت جعل النص أثقل (أغمق) */
     font-weight: 600; 
-    
-    /* إذا أردت حجم خط مختلف */
     font-size: 0.95rem; 
-
     padding: 0.5rem 1rem; /* لترتيب المسافة الداخلية */
 }
 
 /* تنسيق أيقونة الكأس (bi-trophy-fill) داخل العنوان */
 .card-league-header i {
-    /* اجعل لون الأيقونة مطابقاً للون النص أو لون مميز آخر */
     color: #888; 
 }
   
@@ -415,66 +406,46 @@
     }
     
     /* --- Toggler Icon Fix: التحكم في الأيقونات باستخدام CSS --- */
-    /* إلغاء الإطار حول زر التبديل (Toggler) */
-/* 1. التنسيق الأساسي لزر القائمة (Navbar Toggler) */
 .navbar-toggler {
-    /* الحفاظ على الإزالة القوية للحدود الافتراضية */
     border: none !important;
     outline: none !important;
-    
-    /* زيادة المسافة الداخلية قليلاً لإظهار الظل النيومورفي بشكل أفضل */
     padding: 0.5rem; 
     border-radius: 8px; 
     transition: all 0.2s ease;
-
-    /* 💡 تطبيق الظل النيومورفي الخارجي (زر بارز) */
     box-shadow: 4px 4px 8px var(--shadow-dark), 
                 -4px -4px 8px var(--shadow-light) !important;
 }
 
-/* 2. تنسيق حالة الضغط والتركيز (Focus/Active) */
 .navbar-toggler:focus,
 .navbar-toggler:active {
-    /* 💡 تطبيق الظل النيومورفي الداخلي (تأثير الضغط) */
     box-shadow: inset 2px 2px 5px var(--shadow-dark), 
                 inset -2px -2px 5px var(--shadow-light) !important;
 }
 
-/* 3. تنسيق الأيقونة لضمان اللون والحجم */
 .navbar-toggler i {
     color: var(--text-color); 
     font-size: 1.5rem; 
 }
  
-/* 4. إخفاء وإظهار الأيقونات بناءً على حالة القائمة */
 .navbar-toggler .icon-open,
 .navbar-toggler .icon-close {
     display: none;
 }
 
-/* 4.1. عندما تكون القائمة مغلقة (collapsed) - أظهر أيقونة القائمة */
 .navbar-toggler.collapsed .icon-open {
     display: inline-block;
 }
 
-/* 4.2. عندما تكون القائمة مفتوحة (not collapsed) - أظهر أيقونة الإغلاق */
 .navbar-toggler:not(.collapsed) .icon-close {
     display: inline-block;
 }
 /* --- نهاية التعديل --- */
 
 
-  
-  
-  
-  
-  
-  
-  /* 🎨 يجب إضافة هذا الكود إلى ملف الـ CSS الخاص بك أو في وسم <style> */
-/* تلوين حالة "مباشر" باللون الأحمر مع تأثير النبض الخفيف */
+  /* تلوين حالة "مباشر" باللون الأحمر مع تأثير النبض الخفيف */
 .live-status-red {
-    color: #fff !important; /* لون أحمر صريح */
-    animation: pulse-red 0.5s infinite alternate; /* تأثير النبض الخفيف */
+    color: #fff !important; 
+    animation: pulse-red 0.5s infinite alternate; 
     font-weight: bold;
 }
 
@@ -492,67 +463,32 @@
 
 /* 2. تنسيق الفقرة (p) التي تحمل الرسالة */
 #matchTable > .col-12 p {
-    /* جعل الخلفية شفافة للمحتوى الرئيسي */
     background: none; 
     margin-top:-150px;
-    /* Neumorphism: ظل داخلي بسيط لتمييز المنطقة */
     box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), 
                 inset -5px -5px 10px rgba(255, 255, 255, 0.05);
-    
-    /* تنسيقات النص التي تم تحديدها في JS */
-    color: var(--text-color, #000); /* استخدام متغير النص الافتراضي */
-    font-size: 1.25rem; /* fs-5 */
-    padding: 1rem !important; /* p-5 */
+    color: var(--text-color, #000); 
+    font-size: 1.25rem; 
+    padding: 1rem !important; 
     border-radius: 12px;
-    margin: 0rem auto; /* للتأكد من توسيط الفقرة إذا كان الـ col-12 أوسع */
-    max-width: 800px; /* تحديد عرض أقصى لتبدو أفضل على الشاشات الكبيرة */
+    margin: 0rem auto; 
+    max-width: 800px; 
     font-weight: 500;
 }
 
-/* 3. تنسيق خاص لحالة التحميل (Spinner) لضمان التناسق */
 #matchTable .spinner-border {
      color: var(--text-color, #c0c0c0);
 }
 
-/* 4. تعريف متغيرات الألوان (إذا لم تكن معرفة بالفعل في ملف CSS الرئيسي) */
-/*
-:root {
-    --bg-color: #2c2f33; 
-    --text-color: #f6f6f6;
-    --primary-color: #007bff; 
-}
-*/
-  
-  
-  
-  
-  
-  
-  
-
-  
- 
-  
-  
-  
-  
-  
-  
-  
-
-  
-  
   /* --- تنسيقات النيومورفيزم للتذييل (Footer) --- */
 .neumorphic-footer {
     background-color: var(--main-bg) !important;
-    border-top: 1px solid var(--border-color); /* فصل خفيف */
-    /* ظل خفيف للنيومورفيزم (يمكن إعطاؤه ظل داخلي لتبدو كأنها منخفضة قليلاً) */
+    border-top: 1px solid var(--border-color); 
     box-shadow: 
         inset 5px 5px 10px rgba(0, 0, 0, 0.1), 
         inset -5px -5px 10px var(--neumo-shadow-light); 
 }
 
-/* تنسيق الروابط العادية داخل التذييل */
 .footer-link {
     color: var(--text-color);
     text-decoration: none;
@@ -560,10 +496,9 @@
     transition: color 0.2s;
 }
 .footer-link:hover {
-    color: var(--accent-blue); /* استخدام اللون المميز عند التمرير */
+    color: var(--accent-blue); 
 }
 
-/* تنسيق أيقونات التواصل الاجتماعي (لتكون نيو-مورفية) */
 .social-icon-btn {
     display: inline-flex;
     justify-content: center;
@@ -576,15 +511,12 @@
     text-decoration: none;
     border-radius: 50%;
     transition: all 0.3s ease;
-    
-    /* الظل الافتراضي للأيقونة (بارزة) */
     box-shadow: 
         3px 3px 6px var(--neumo-shadow-dark), 
         -3px -3px 6px var(--neumo-shadow-light);
     background-color: var(--card-bg);
 }
 
-/* تأثير الضغط (inset) عند التمرير على الأيقونات */
 .social-icon-btn:hover {
     color: var(--accent-blue);
     box-shadow: 
@@ -592,47 +524,144 @@
         inset -3px -3px 6px var(--neumo-shadow-light);
 }
   
-  
-  
-  
-  
-  
   /* --- Scroll To Top Button (زر الرجوع للأعلى) --- */
 #scrollToTopBtn {
-    /* التموضع والتثبيت */
     position: fixed;
-    bottom: 25px; /* مسافة من الأسفل */
-    right: 25px; /* مسافة من اليمين */
-    z-index: 1000; /* ليبقى فوق جميع العناصر */
-    
-    /* الشكل والحجم */
+    bottom: 25px; 
+    right: 25px; 
+    z-index: 1000; 
     padding: 1rem 1.2rem;
-    border-radius: 50%; /* شكل دائري */
+    border-radius: 50%; 
     line-height: 1; 
-    
-    /* الإخفاء والتأثيرات الانتقالية */
-    opacity: 0; /* مخفي افتراضياً */
-    visibility: hidden; /* مخفي أيضاً لمنع التفاعل قبل الظهور */
-    transform: scale(0.9); /* تصغير بسيط عند الاختفاء */
+    opacity: 0; 
+    visibility: hidden; 
+    transform: scale(0.9); 
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-/* حالة الظهور (يتم إضافتها/إزالتها بواسطة جافاسكريبت) */
 #scrollToTopBtn.show {
     opacity: 1;
     visibility: visible;
-    transform: scale(1); /* الحجم الطبيعي عند الظهور */
+    transform: scale(1); 
 }
 
-/* تأثير التفاعل (Hover) */
 #scrollToTopBtn:hover {
-    /* تغيير الظل قليلاً عند التفاعل ليعطي إحساس الضغط */
     box-shadow: 
         4px 4px 8px var(--neumo-shadow-dark), 
         -4px -4px 8px var(--neumo-shadow-light); 
     background-color: var(--card-hover);
 }
-  
+
+
+/* ========================================== */
+/* 🌟 1. تنسيقات مشغل البث المباشر (النيومورفيزم) 🌟 */
+/* ========================================== */
+.player-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(224, 229, 236, 0.85); /* لون الخلفية مع شفافية */
+    backdrop-filter: blur(10px); /* تأثير زجاجي ضبابي جذاب */
+    z-index: 2500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.player-modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.player-modal-content {
+    background-color: var(--main-bg);
+    border-radius: 24px;
+    width: 90%;
+    max-width: 850px;
+    padding: 1.5rem;
+    /* ظل بارز ثلاثي الأبعاد يعبر عن النيومورفيزم */
+    box-shadow: 
+        20px 20px 40px var(--neumo-shadow-dark), 
+        -20px -20px 40px var(--neumo-shadow-light);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    transform: scale(0.95);
+    transition: transform 0.35s ease;
+}
+
+.player-modal-overlay.show .player-modal-content {
+    transform: scale(1);
+}
+
+.player-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.player-modal-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    margin: 0;
+}
+
+/* زر إغلاق بتصميم نيومورفيك مريح للعين */
+.player-close-btn {
+    background-color: var(--card-bg);
+    border: none;
+    color: var(--text-color);
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        5px 5px 10px var(--neumo-shadow-dark), 
+        -5px -5px 10px var(--neumo-shadow-light);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.player-close-btn:hover {
+    color: var(--live-red);
+    box-shadow: 
+        inset 3px 3px 6px var(--neumo-shadow-dark), 
+        inset -3px -3px 6px var(--neumo-shadow-light);
+}
+
+/* حاوية مشغل الفيديو بأبعاد 16:9 متجاوبة */
+.player-iframe-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Ratio 16:9 */
+    height: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    /* ظل داخلي للمشغل ليعطي إحساس بالعمق */
+    box-shadow: 
+        inset 6px 6px 12px var(--neumo-shadow-dark), 
+        inset -6px -6px 12px var(--neumo-shadow-light);
+    background-color: #000; /* خلفية سوداء للمشاهدة */
+}
+
+.player-iframe-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+/* ========================================== */
   
 </style>
     </head>
@@ -848,48 +877,53 @@
         </div>
     </div>
 </footer>
-  
+
+<!-- ========================================== */
+<!-- 🌟 2. هيكل مشغل البث المباشر (مخفي افتراضياً) 🌟 -->
+<!-- ========================================== */ -->
+<div id="playerModal" class="player-modal-overlay">
+    <div class="player-modal-content">
+        <div class="player-modal-header">
+            <h5 id="playerMatchTitle" class="player-modal-title">مشاهدة المباراة بث مباشر</h5>
+            <button id="closePlayerBtn" class="player-close-btn">
+                <i class="bi bi-x-lg"></i> إغلاق
+            </button>
+        </div>
+        <div class="player-iframe-wrapper">
+            <!-- سيتم تحميل رابط البث المباشر هنا ديناميكياً عند النقر -->
+            <iframe id="matchPlayerIframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+        </div>
+    </div>
+</div>
+<!-- ========================================== -->
   
 <button id="scrollToTopBtn" class="filter-btn" title="الرجوع للأعلى">
     <i class="bi bi-arrow-up"></i>
 </button>
 <script>
-// ... (الكود الموجود لديك)
-
-// 🌟 متغير جديد لتخزين موضع التمرير السابق 🌟
 var lastScrollTop = 0; 
 
 document.addEventListener('DOMContentLoaded', () => {
-    // ... (وظيفة التحميل الأولي للمباريات ومنطق القائمة)
 
-    // --- Scroll To Top Logic (منطق زر الرجوع للأعلى المُصحح والمُحسن) ---
+    // --- Scroll To Top Logic ---
     const scrollButton = document.getElementById('scrollToTopBtn');
-    // القيمة التي يظهر عندها الزر (عند التمرير للأسفل)
     const showThreshold = 1400;  
 
     if (scrollButton) { 
         
         window.addEventListener('scroll', () => {
             var currentScroll = window.scrollY || document.documentElement.scrollTop;
-
-            // 1. منطق الإظهار/الإخفاء بناءً على الاتجاه والموضع
             
             if (currentScroll > lastScrollTop && currentScroll > showThreshold) {
-                // التمرير للأسفل (Downscroll) وتم تجاوز عتبة الظهور (300 بكسل)
-                // ➡️ يظهر الزر
                 scrollButton.classList.add('show'); 
             } 
             else if (currentScroll < lastScrollTop) {
-                // التمرير للأعلى (Upscroll) 
-                // ➡️ يختفي الزر فوراً بمجرد بدء التمرير للأعلى
                 scrollButton.classList.remove('show'); 
             }
             
-            // 2. تحديث موضع التمرير السابق للمقارنة في التكرار التالي
-            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // منع القيم السالبة
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; 
         });
 
-        // 3. عمل الزر عند النقر (كما هو)
         scrollButton.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
@@ -897,9 +931,47 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-    // --- نهاية Scroll To Top Logic المُحسن ---
-    
-    // ... (بقية كود DOMContentLoaded)
+
+    // ========================================== */
+    // 🌟 3. منطق التحكم بفتح وإغلاق مشغل البث المباشر 🌟
+    // ========================================== */
+    const playerModal = document.getElementById('playerModal');
+    const closePlayerBtn = document.getElementById('closePlayerBtn');
+    const matchPlayerIframe = document.getElementById('matchPlayerIframe');
+
+    // دالة إغلاق المشغل
+    function closePlayer() {
+        if (playerModal && matchPlayerIframe) {
+            playerModal.classList.remove('show');
+            matchPlayerIframe.setAttribute('src', ''); // تفريغ الرابط لإيقاف تشغيل الصوت والفيديو فوراً
+            document.body.style.overflow = ''; // إعادة تمكين التمرير في الصفحة
+        }
+    }
+
+    if (closePlayerBtn) {
+        closePlayerBtn.addEventListener('click', closePlayer);
+    }
+
+    // إغلاق المشغل عند النقر في المساحة الفارغة خارج نافذة الفيديو
+    if (playerModal) {
+        playerModal.addEventListener('click', (e) => {
+            if (e.target === playerModal) {
+                closePlayer();
+            }
+        });
+    }
+
+    // لتسهيل الاستخدام من داخل دوال بناء البطاقات
+    window.openPlayer = function(url, title) {
+        const playerTitle = document.getElementById('playerMatchTitle');
+        if (playerModal && matchPlayerIframe) {
+            if (playerTitle) playerTitle.textContent = title;
+            matchPlayerIframe.setAttribute('src', url);
+            playerModal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // منع التمرير في الخلفية أثناء المشاهدة
+        }
+    };
+    // ========================================== */
 });
  </script>
       
@@ -933,14 +1005,10 @@ var matchTable = document.querySelector("#matchTable");
 var todayBtn = document.querySelector("#todayFilterBtn");
 var yesterdayBtn = document.querySelector("#yesterdayFilterBtn");
 var liveBtn = document.querySelector("#liveFilterBtn");
-// تم إزالة: tomorrowBtn
 
 
 // --- Utility Functions (الدوال المساعدة) ---
 
-/**
- * تحدد تاريخ اليوم أو الأمس بناءً على التوقيت المحلي للمغرب (GMT+1).
- */
 function getDateString(type) {
     const nowInMorocco = new Date(new Date().toLocaleString("en-US", { timeZone: "Africa/Casablanca" }));
     const date = new Date(nowInMorocco);
@@ -956,9 +1024,6 @@ function getDateString(type) {
     return `${year}-${month}-${day}`;
 }
 
-/**
- * تحويل توقيت الـ API (المفترض أنه GMT) إلى توقيت المغرب (GMT+1) للعرض.
- */
 function convertTimeToMorocco(apiTime, apiDate) {
     if (!apiTime || apiTime.trim() === '00:00' || apiTime.trim() === 'Start Soon') {
         return apiTime || 'N/A';
@@ -981,17 +1046,11 @@ function convertTimeToMorocco(apiTime, apiDate) {
     return moroccoTime;
 }
 
-/**
- * تتحقق مما إذا كانت المباراة حية رسمياً بناءً على حالة الـ API فقط (status 1 أو 4).
- */
 function isMatchTrulyLive(data) {
     if (data.status === 1 || data.status === 4) return true;
     return false;
 }
 
-/**
- * يحدد نص الحالة الصحيح للمباراة للعرض بناءً على data.status.
- */
 function getMatchStatusText(data) {
 
     switch (data.status) {
@@ -999,7 +1058,6 @@ function getMatchStatusText(data) {
             return 'انتهت';
         case 1:
             const parts = data.score.split('-').map(s => s.trim());
-            // تحقق بسيط لتجنب عرض "استراحة" إذا كان الوقت جاري
             const totalScore = parseInt(parts[0]) + parseInt(parts[1]);
 
             if (data.score.trim() === '-' || totalScore === 0) {
@@ -1015,9 +1073,6 @@ function getMatchStatusText(data) {
     }
 }
 
-/**
- * يحدد ما إذا كان يجب عرض النتيجة أو التوقيت.
- */
 function getMatchScoreOrTime(data) {
     const trulyLive = isMatchTrulyLive(data);
     const isEnded = (data.status === 2);
@@ -1031,18 +1086,10 @@ function getMatchScoreOrTime(data) {
     }
 }
 
-// 🌟 الدالة الجديدة لاستخراج الكلمة الأولى للفريق على الهواتف 🌟
-/**
- * يستخرج الكلمة الأولى من اسم الفريق.
- * @param {string} teamName الاسم الكامل للفريق.
- * @returns {string} الكلمة الأولى من الاسم.
- */
 function getFirstWord(teamName) {
     if (!teamName) return '';
-    // يقسم السلسلة عند أول مسافة ويأخذ الجزء الأول
     return teamName.trim().split(/\s+/)[0];
 }
-// 🌟 نهاية الدالة الجديدة 🌟
 
 
 // --- Match Tile Builder (توليد بطاقة المباراة) ---
@@ -1051,7 +1098,11 @@ function addMatchTile(data) {
     var link = MAIN_URL;
     var title = data.home + " ضد " + data.away;
 
-    if (data.has_channels == 1 && data.active == 1) {
+    // التحقق مما إذا كانت المباراة تحتوي على قنوات بث مباشر نشطة
+    const hasLiveStream = (data.has_channels == 1 && data.active == 1);
+
+    if (hasLiveStream) {
+        // يمكنك تعديل الرابط هنا أو تركه كما هو ليتم جلبه ديناميكياً من السيرفر
         link = STREAMING_URL +'?m='+data.id+'&lang=ar';
     }
 
@@ -1059,9 +1110,7 @@ function addMatchTile(data) {
     var statusText = getMatchStatusText(data);
 
     const isTrulyLiveNow = isMatchTrulyLive(data);
-
     const moroccoTimeDisplay = convertTimeToMorocco(data.time, data.date);
-
 
     // 1. Create Wrapper
     var colWrapper = document.createElement('div');
@@ -1076,15 +1125,24 @@ function addMatchTile(data) {
 
     var matchLink = document.createElement('a');
     matchLink.classList.add('match-link-overlay');
-    matchLink.setAttribute('href', link);
+    matchLink.setAttribute('href', '#'); // نضعه رابطاً فارغاً لمنع الانتقال لصفحة أخرى
     matchLink.setAttribute('title', title);
-    if (data.has_channels == 1 && data.active == 1) {
-        matchLink.setAttribute('rel', "noopener noreferrer");
-        matchLink.setAttribute('target', "_blank");
-    }
+    
+    // ========================================== */
+    // 🌟 4. ربط حدث النقر على البطاقة بفتح المشغل داخلياً 🌟
+    // ========================================== */
+    matchLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (hasLiveStream) {
+            // نمرر رابط السيرفر والعنوان للمشغل
+            openPlayer(link, title); 
+        } else {
+            console.log("هذه المباراة لا تحتوي على بث مباشر حالياً.");
+        }
+    });
+    // ========================================== */
 
     // --- A. DESKTOP LAYOUT STRUCTURE (Horizontal Wide) ---
-    // هذا الجزء لم يتم تعديله، ويعرض الاسم الكامل (data.home / data.away)
     var desktopLayout = document.createElement('div');
     desktopLayout.classList.add("desktop-layout");
 
@@ -1128,7 +1186,6 @@ function addMatchTile(data) {
 
 
     // --- B. MOBILE LAYOUT STRUCTURE (Standard Strip) ---
-    // هذا الجزء تم تعديله ليستخدم الكلمة الأولى (getFirstWord)
     var mobileLayout = document.createElement('div');
     mobileLayout.classList.add("mobile-layout");
 
@@ -1156,7 +1213,6 @@ function addMatchTile(data) {
     // Home Team
     var mobHomeTeam = document.createElement('div');
     mobHomeTeam.classList.add("team-side-horizontal", "team-home-strip");
-    // 💡 الآن نستخدم الكلمة الأولى فقط هنا:
     const homeNameDisplay = getFirstWord(data.home); 
     mobHomeTeam.innerHTML = `
         <img src="${API_TEAM_URL + data.home_logo}" class="team-logo-horizontal" alt="${data.home_en}">
@@ -1174,7 +1230,6 @@ function addMatchTile(data) {
     // Away Team
     var mobAwayTeam = document.createElement('div');
     mobAwayTeam.classList.add("team-side-horizontal", "team-away-strip");
-    // 💡 الآن نستخدم الكلمة الأولى فقط هنا:
     const awayNameDisplay = getFirstWord(data.away);
     mobAwayTeam.innerHTML = `
         <img src="${API_TEAM_URL + data.away_logo}" class="team-logo-horizontal" alt="${data.away_en}">
@@ -1185,7 +1240,6 @@ function addMatchTile(data) {
     mobTeamsVsScoreColumn.appendChild(mobScoreSeparator);
     mobTeamsVsScoreColumn.appendChild(mobAwayTeam);
 
-    // Assemble Mobile Layout
     mobileLayout.appendChild(mobTimeStatusColumn); // Time/Status on Right
     mobileLayout.appendChild(mobTeamsVsScoreColumn); // Teams on Left
 
@@ -1211,12 +1265,10 @@ function renderMatches(matches) {
             ? 'لا توجد مباريات مباشرة حاليًا.'
             : (currentDay === 'yesterday' ? 'لا توجد نتائج مباريات لهذا اليوم.' : 'لا توجد مباريات متاحة لليوم.');
 
-        // تحديد اللون مباشرة بناءً على نوع الرسالة
         const messageColor = isLiveFilterActive
-            ? LIVE_RED // لون أحمر للنص المباشر
-            : TEXT_COLOR; // لون داكن للنص العام
+            ? LIVE_RED 
+            : TEXT_COLOR; 
 
-        // استخدام التنسيق الداخلي (style="...") لتطبيق اللون وحجم الخط
         matchTable.innerHTML = `
             <div class="col-12">
                 <p class="text-center p-5 fs-5"
@@ -1235,33 +1287,25 @@ function filterAndRender() {
     let filteredMatches = allMatchesData;
 
     if (isLiveFilterActive) {
-        // إذا كان فلتر المباشر مفعلاً، يتم عرض المباريات الحية من بيانات اليوم التي تم جلبها
         filteredMatches = allMatchesData.filter(match => isMatchTrulyLive(match));
     } else {
         if (currentDay === 'yesterday') {
-            // فلترة مباريات الأمس المنتهية فقط
             filteredMatches = allMatchesData.filter(match => match.status === 2);
         }
-        // لـ 'today'، يتم عرض كل مباريات allMatchesData المجلوبة
     }
 
     renderMatches(filteredMatches);
 }
 
-/**
- * تبدأ أو توقف حلقة تحديث جلب البيانات كل 30 ثانية.
- */
 function toggleAutoUpdate(shouldStart) {
     if (updateIntervalId) {
         clearInterval(updateIntervalId);
         updateIntervalId = null;
     }
 
-    // يتم التحديث التلقائي فقط إذا كنا في عرض "اليوم" أو في عرض "مباشر"
     if (shouldStart && (currentDay === 'today' || isLiveFilterActive)) {
         updateIntervalId = setInterval(() => {
             console.log('Auto-updating matches...');
-            // نستخدم 'today' كـ day في التحديث التلقائي حتى لو كنا في فلتر المباشر
             fetchMatches('today', true);
         }, UPDATE_INTERVAL_MS);
     }
@@ -1269,22 +1313,17 @@ function toggleAutoUpdate(shouldStart) {
 
 
 function fetchMatches(day, isUpdate = false) {
-    // هذه الدالة الآن تعيد Promise (مطلوب للإصلاح)
     
     if (!isUpdate) {
         toggleAutoUpdate(false);
 
         currentDay = day;
-
-        // عند تغيير اليوم، يتم إلغاء تفعيل فلتر المباشر
         isLiveFilterActive = false;
         if(liveBtn) liveBtn.classList.remove('active');
 
-        // إزالة فئة 'active' من كل الأزرار
         if (todayBtn) todayBtn.classList.remove('active');
         if (yesterdayBtn) yesterdayBtn.classList.remove('active');
 
-        // تفعيل الزر الحالي
         if (day === 'today' && todayBtn) {
             todayBtn.classList.add('active');
         } else if (day === 'yesterday' && yesterdayBtn) {
@@ -1300,7 +1339,6 @@ function fetchMatches(day, isUpdate = false) {
         </div>`;
     }
 
-    // إذا كان التحديث صامتًا ونحن لا نعرض مباريات اليوم أو المباشر، لا تفعل شيئاً
     if (isUpdate && day !== 'today' && !isLiveFilterActive) {
         toggleAutoUpdate(false);
         return Promise.resolve();
@@ -1308,13 +1346,11 @@ function fetchMatches(day, isUpdate = false) {
 
 
     const selectedDate = getDateString(day);
-
     const API_URL_MATCHES = `https://ws.kora-api.top/api/matches/${selectedDate}/1?t=${new Date().getMinutes()}`;
 
-    return fetch(API_URL_MATCHES) // إرجاع الـ Promise
+    return fetch(API_URL_MATCHES) 
         .then(res => {
             if (!res.ok) {
-                // إذا فشل الاتصال بالشبكة
                 throw new Error('فشل الاتصال بالشبكة');
             }
             return res.json();
@@ -1322,15 +1358,12 @@ function fetchMatches(day, isUpdate = false) {
         .then(data => {
             if (data && data.matches) {
 
-                // 🛑 الكلمات الممنوع ظهورها
                 const excludedKeywords = [
                     'جائزة قطر الكبرى', 'فورمولا 1', 'Formula 1', 'إسرائيلي', 'اسرائيلي', 'Israel', 'Israeli', 'الدوري الألماني الدرجة الثانية', 'دوري استراليا الممتاز','nba','الدوري الإسكتلندي للمحترفين' 
                 ];
 
-              // قم بإنشاء قائمة بالكلمات الممنوعة بأحرف صغيرة لتجنب التحويل المتكرر
-const lowerCaseExcluded = excludedKeywords.map(k => k.toLowerCase());
+                const lowerCaseExcluded = excludedKeywords.map(k => k.toLowerCase());
               
-                // 🌟🌟🌟 فلترة المباريات غير المرغوب فيها 🌟🌟🌟
                 const filteredAPI_Matches = data.matches.filter(match => {
 
                     const combinedText = [
@@ -1350,14 +1383,12 @@ const lowerCaseExcluded = excludedKeywords.map(k => k.toLowerCase());
 
                     return !isExcluded;
                 });
-                // 🌟🌟🌟 نهاية فلترة المباريات 🌟🌟🌟
 
                 allMatchesData = filteredAPI_Matches.map(match => ({
                     ...match,
                     date: selectedDate
                 }));
 
-                // تفعيل التحديث التلقائي إذا كنا على 'today' أو 'live'
                 toggleAutoUpdate(true);
 
             } else {
@@ -1365,27 +1396,25 @@ const lowerCaseExcluded = excludedKeywords.map(k => k.toLowerCase());
                 toggleAutoUpdate(false);
             }
 
-            // عرض المباريات ما لم يكن تحديثًا صامتًا لفلتر المباشر (لأن filterAndRender سيتم استدعاؤها في liveBtn)
           if (!isUpdate || !isLiveFilterActive) {
-    filterAndRender();
-}
+                filterAndRender();
+          }
  
-            return data; // نمرر البيانات لأي استخدام مستقبلي
+            return data; 
         })
         .catch(err => {
             console.error("Failed to fetch matches:", err);
-            if (!isUpdate) { // عرض رسالة الخطأ فقط عند الجلب الأساسي (وليس التحديث الصامت)
+            if (!isUpdate) { 
                     matchTable.innerHTML = `<div class="col-12"><p class="text-center text-danger p-5 fs-5" style="color: ${LIVE_RED}; font-weight: 600;"><i class="bi bi-x-octagon-fill me-2"></i> حدث خطأ أثناء تحميل المباريات.</p></div>`;
             }
             toggleAutoUpdate(false);
             allMatchesData = [];
-            // نرفع الخطأ مرة أخرى لكي يلتقطه الـ .catch أو .finally في liveBtn
             throw err;
         });
 }
 
 
-// --- Event Listeners and Initial Load (المستمعون للأحداث والتحميل الأولي) ---
+// --- Event Listeners and Initial Load ---
 
 if (todayBtn) todayBtn.addEventListener('click', () => fetchMatches('today'));
 if (yesterdayBtn) yesterdayBtn.addEventListener('click', () => {
@@ -1395,34 +1424,25 @@ if (yesterdayBtn) yesterdayBtn.addEventListener('click', () => {
 
 
 if (liveBtn) liveBtn.addEventListener('click', () => {
-    // 1. تبديل حالة الفلتر
     isLiveFilterActive = !isLiveFilterActive;
     liveBtn.classList.toggle('active', isLiveFilterActive);
 
     if (isLiveFilterActive) {
-        // إذا تم تفعيل فلتر المباشر:
-        // أ. إلغاء تفعيل أزرار اليوم والأمس
-        if (todayBtn) todayBtn.classList.remove('active');
+        if (todayBtn) todayBtn.remove('active');
         if (yesterdayBtn) yesterdayBtn.classList.remove('active');
 
-        currentDay = 'today'; // يجب أن نجلب بيانات اليوم لنجد المباريات المباشرة
+        currentDay = 'today'; 
 
-        // ب. جلب بيانات اليوم وتطبيق فلتر المباشر عليها
-        // نستخدم isUpdate=true لإخبار fetchMatches بعدم تحديث حالة الأزرار مرة أخرى
         fetchMatches('today', true).finally(() => {
-            // ج. بعد الجلب، نقوم بالفلترة والعرض (سيتم عرض المباريات الحية فقط من البيانات الجديدة)
             filterAndRender();
-            // د. تفعيل التحديث التلقائي
             toggleAutoUpdate(true);
         });
 
     } else {
-        // إذا تم إلغاء تفعيل فلتر المباشر:
         currentDay = 'today';
         if (todayBtn) todayBtn.classList.add('active');
         if (yesterdayBtn) yesterdayBtn.classList.remove('active');
 
-        // إعادة جلب بيانات اليوم وعرضها بالكامل
         fetchMatches('today');
     }
 });
@@ -1431,37 +1451,27 @@ if (liveBtn) liveBtn.addEventListener('click', () => {
 // --- وظيفة التحكم اليدوي بفتح وإغلاق القائمة (Navigation) ---
 
 document.addEventListener('DOMContentLoaded', () => {
-    // التحميل الأولي للمباريات
     fetchMatches('today');
 
-    // جلب عناصر القائمة
     const togglerButton = document.getElementById('customNavbarToggler');
     const navbarCollapseDiv = document.getElementById('navbarNav');
     const navLinks = document.querySelectorAll('#navbarNav .nav-link');
 
-    // 1. دالة التحكم في الفتح والإغلاق عند النقر على الزر
     if (togglerButton && navbarCollapseDiv) {
         togglerButton.addEventListener('click', () => {
-            // تبديل فئة 'show' على القائمة (لفتحها/إغلاقها)
             navbarCollapseDiv.classList.toggle('show');
-
-            // تبديل فئة 'collapsed' على الزر (لتبديل الأيقونات)
             togglerButton.classList.toggle('collapsed');
 
-            // تحديث حالة aria-expanded لأغراض الوصول (Accessibility)
             const isExpanded = togglerButton.getAttribute('aria-expanded') === 'true' || false;
             togglerButton.setAttribute('aria-expanded', !isExpanded);
         });
     }
 
-    // 2. دالة الإغلاق التلقائي عند النقر على أي رابط
     if (navbarCollapseDiv) {
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
-                // إغلاق القائمة (إزالة فئة 'show')
                 navbarCollapseDiv.classList.remove('show');
 
-                // إعادة الزر إلى حالة 'collapsed' لإظهار أيقونة القائمة
                 if (togglerButton) {
                     togglerButton.classList.add('collapsed');
                     togglerButton.setAttribute('aria-expanded', 'false');
@@ -1474,4 +1484,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </body>
   
 </html>
-
