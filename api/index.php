@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     
-    <!-- وسوم تهيئة الموقع لمحركات البحث والهواتف -->
-    <meta name="description" content="Pro M3U8 Player - Ultra منصة بث القنوات والروابط التفاعلية" />
+    <!-- وسوم تهيئة الموقع للأجهزة وشاشات التلفاز -->
+    <meta name="description" content="Pro M3U8 Player - Ultra" />
     <meta name="theme-color" content="#08080c" />
     <title>Pro M3U8 Player - Ultra</title>
     
@@ -27,7 +27,7 @@
             --card-hover: #1b1e2a;
             --danger-color: #ff3b30;
 
-            /* قياسات تخطيطية تتغير بتغير الشاشة */
+            /* قياسات تتغير بتغير حجم الشاشة */
             --sidebar-width: 340px;
             --base-font-size: 16px;
             --item-padding: 14px 16px;
@@ -35,7 +35,7 @@
             --header-padding: 25px 20px;
         }
 
-        /* 1. تخصيصات الشاشات اللوحية (Tablets) */
+        /* 1. الشاشات اللوحية (Tablets) */
         @media (min-width: 768px) and (max-width: 1024px) {
             :root {
                 --sidebar-width: 280px;
@@ -46,7 +46,7 @@
             }
         }
 
-        /* 2. تخصيصات شاشات التلفاز والشاشات الضخمة (TV & Large Displays) */
+        /* 2. شاشات التلفاز والشاشات الضخمة (TV & Large Displays) */
         @media (min-width: 1440px) {
             :root {
                 --sidebar-width: 420px;
@@ -57,7 +57,7 @@
             }
         }
 
-        /* 3. تخصيصات الهواتف الذكية (Mobile) */
+        /* 3. الهواتف الذكية (Mobile) */
         @media (max-width: 767px) {
             :root {
                 --sidebar-width: 100%;
@@ -85,170 +85,18 @@
 
         #app {
             display: flex;
-            flex-direction: row; /* يضمن أن المشغل في اليمين والقنوات على اليسار في الشاشات الكبيرة */
+            flex-direction: row; /* يضمن عرض القائمة في اليمين والمشغل في اليسار في الشاشات الكبيرة */
             height: 100vh;
             width: 100%;
         }
 
-        /* ==================== 1. المشغل الرئيسي (اليمين) ==================== */
-        #content {
-            flex: 1;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            background: #000;
-            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.95);
-        }
-
-        #player-wrapper {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #jwplayer-container {
-            width: 100%;
-            height: 100%;
-            background: #000;
-            position: relative;
-        }
-
-        /* زر إضافة قناة العائم */
-        .toggle-add-btn {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            z-index: 100;
-            background: rgba(0, 210, 255, 0.15);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--accent-color);
-            color: var(--accent-color);
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 26px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.25);
-        }
-
-        .toggle-add-btn:hover {
-            background: var(--accent-color);
-            color: #000;
-            transform: rotate(90deg) scale(1.08);
-            box-shadow: 0 0 25px var(--accent-glow);
-        }
-
-        /* نافذة إضافة القناة العلوية المنسدلة */
-        #add-slider {
-            position: absolute;
-            top: -100%; 
-            left: 0;
-            right: 0;
-            background: rgba(14, 15, 20, 0.96);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            z-index: 101;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            padding: 25px 20px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            border-bottom: 2px solid var(--accent-color);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-        }
-
-        #add-slider.show {
-            top: 0;
-        }
-
-        .slider-title {
-            font-size: 1.15rem;
-            font-weight: 500;
-            color: var(--accent-color);
-            margin-bottom: 5px;
-            letter-spacing: 0.5px;
-        }
-
-        .slider-inputs {
-            display: flex;
-            gap: 15px;
-            width: 100%;
-            max-width: 700px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .add-input {
-            background: #1a1c26;
-            border: 1px solid #2d3042;
-            padding: 14px 22px;
-            border-radius: 30px;
-            color: white;
-            outline: none;
-            flex: 1;
-            font-size: 0.95rem;
-            transition: 0.3s;
-        }
-
-        .add-input:focus {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 12px rgba(0, 210, 255, 0.2);
-        }
-
-        .btn-save {
-            background: var(--accent-color);
-            color: #000;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 30px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            white-space: nowrap;
-        }
-
-        .btn-save:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px var(--accent-glow);
-        }
-
-        .btn-close-slider {
-            background: rgba(255, 255, 255, 0.08);
-            color: white;
-            border: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            transition: 0.3s;
-        }
-
-        .btn-close-slider:hover {
-            background: var(--danger-color);
-            transform: scale(1.05);
-        }
-
-        /* ==================== 2. شريط القنوات الجانبي (اليسار) ==================== */
+        /* ==================== 1. شريط القنوات الجانبي (اليمين) ==================== */
         #sidebar {
             width: var(--sidebar-width);
             background: var(--sidebar-bg);
             display: flex;
             flex-direction: column;
-            border-right: 1px solid rgba(255, 255, 255, 0.04);
+            border-left: 1px solid rgba(255, 255, 255, 0.04); /* فاصل جهة اليسار */
             z-index: 10;
             transition: width 0.3s ease;
         }
@@ -350,10 +198,11 @@
             font-weight: 400;
         }
 
+        /* انزلاق طفيف لليمين يتناسب مع موضع القائمة الجديد */
         .channel-item:hover {
             background: var(--card-hover);
             border-color: rgba(0, 210, 255, 0.3);
-            transform: translateX(-4px);
+            transform: translateX(4px); 
         }
 
         .channel-item.active {
@@ -366,7 +215,7 @@
             text-shadow: 0 0 10px var(--accent-color);
         }
 
-        /* زر الحذف الجانبي */
+        /* زر الحذف */
         .btn-delete {
             background: none;
             border: none;
@@ -385,6 +234,171 @@
             background: rgba(255, 59, 48, 0.12);
         }
 
+        /* ==================== 2. المشغل الرئيسي (اليسار) ==================== */
+        #content {
+            flex: 1;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background: #000;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.95);
+        }
+
+        #player-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #jwplayer-container {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            position: relative;
+        }
+
+        /* زر إضافة قناة العائم مع خاصية الإخفاء التلقائي */
+        .toggle-add-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            z-index: 100;
+            background: rgba(0, 210, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 26px;
+            
+            /* إخفاء افتراضي مع تأثير انتقالي ناعم */
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.9);
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s, color 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.25);
+        }
+
+        /* حالات ظهور الزر: عند التمرير، أو عند تفعيل كلاس العرض، أو عند فتح السلايدر */
+        #content:hover .toggle-add-btn,
+        #content.show-controls .toggle-add-btn {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+
+        .toggle-add-btn:hover {
+            background: var(--accent-color);
+            color: #000;
+            transform: scale(1.08) rotate(90deg) !important;
+            box-shadow: 0 0 25px var(--accent-glow);
+        }
+
+        /* لوحة إضافة القناة المنسدلة */
+        #add-slider {
+            position: absolute;
+            top: -100%; 
+            left: 0;
+            right: 0;
+            background: rgba(14, 15, 20, 0.96);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            z-index: 101;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 25px 20px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border-bottom: 2px solid var(--accent-color);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        #add-slider.show {
+            top: 0;
+        }
+
+        .slider-title {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .slider-inputs {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            max-width: 700px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .add-input {
+            background: #1a1c26;
+            border: 1px solid #2d3042;
+            padding: 14px 22px;
+            border-radius: 30px;
+            color: white;
+            outline: none;
+            flex: 1;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+
+        .add-input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 12px rgba(0, 210, 255, 0.2);
+        }
+
+        .btn-save {
+            background: var(--accent-color);
+            color: #000;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--accent-glow);
+        }
+
+        .btn-close-slider {
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            transition: 0.3s;
+        }
+
+        .btn-close-slider:hover {
+            background: var(--danger-color);
+            transform: scale(1.05);
+        }
+
         iframe {
             width: 100%;
             height: 100%;
@@ -392,7 +406,7 @@
             display: none;
         }
 
-        /* تهيئة شريط التمرير الجانبي */
+        /* تخصيص شريط التمرير */
         #channels-list::-webkit-scrollbar {
             width: 6px;
         }
@@ -413,18 +427,19 @@
         /* ==================== 3. التجاوب مع الهواتف الذكية (Mobile CSS) ==================== */
         @media (max-width: 767px) {
             #app {
-                flex-direction: column; /* المشغل أعلى الشاشة والقنوات بالأسفل */
+                /* استخدام column-reverse لعرض المشغل بالأعلى والقائمة بالأسفل تلقائياً */
+                flex-direction: column-reverse; 
             }
 
             #content {
-                height: 45vh; /* تحديد نصف حجم الشاشة تقريباً للمشغل */
+                height: 45vh; /* ارتفاع المشغل بالهاتف */
                 box-shadow: 0 4px 20px rgba(0,0,0,0.5);
             }
 
             #sidebar {
                 width: 100%;
-                height: 55vh; /* النصف الآخر للقائمة */
-                border-right: none;
+                height: 55vh; /* ارتفاع القائمة بالهاتف */
+                border-left: none;
                 border-top: 1px solid rgba(255, 255, 255, 0.05);
             }
 
@@ -458,34 +473,7 @@
 <body>
 
     <div id="app">
-        <!-- المشغل الرئيسي (يمين) -->
-        <main id="content">
-            <!-- زر الإضافة العائم -->
-            <div class="toggle-add-btn" onclick="toggleSlider()" title="إضافة قناة جديدة">
-                <i class='bx bx-plus'></i>
-            </div>
-
-            <!-- لوحة إضافة القناة المنسدلة -->
-            <div id="add-slider">
-                <div class="slider-title">إضافة قناة جديدة مخصصة</div>
-                <div class="slider-inputs">
-                    <input type="text" id="new-name" class="add-input" placeholder="اكتب اسم القناة هنا...">
-                    <input type="text" id="new-url" class="add-input" placeholder="رابط البث (m3u8 أو Iframe)...">
-                    <button class="btn-save" onclick="addNewChannel()">حفظ القناة</button>
-                    <button class="btn-close-slider" onclick="toggleSlider()"><i class='bx bx-x'></i></button>
-                </div>
-            </div>
-
-            <!-- حاوية البث -->
-            <div id="player-wrapper">
-                <div id="jwplayer-container">
-                    <div id="jw-element"></div>
-                    <iframe id="live-iframe" allowfullscreen></iframe>
-                </div>
-            </div>
-        </main>
-
-        <!-- شريط القنوات الجانبي (يسار) -->
+        <!-- شريط القنوات الجانبي (يمين الشاشة الكبيرة) -->
         <aside id="sidebar">
             <div class="sidebar-header">
                 <div class="brand">
@@ -499,14 +487,40 @@
                 </div>
             </div>
             
-            <!-- القنوات المفعلة والمضافة -->
             <ul id="channels-list">
-                <!-- يتم التوليد التلقائي هنا -->
+                <!-- القنوات تحقن برمجياً -->
             </ul>
         </aside>
+
+        <!-- المشغل الرئيسي (يسار الشاشة الكبيرة) -->
+        <main id="content">
+            <!-- زر الإضافة العائم بخصائص التحكم بالحركة والظهور -->
+            <div class="toggle-add-btn" onclick="toggleSlider(event)" title="إضافة قناة جديدة">
+                <i class='bx bx-plus'></i>
+            </div>
+
+            <!-- لوحة إضافة القناة المنسدلة -->
+            <div id="add-slider">
+                <div class="slider-title">إضافة قناة جديدة مخصصة</div>
+                <div class="slider-inputs">
+                    <input type="text" id="new-name" class="add-input" placeholder="اكتب اسم القناة هنا...">
+                    <input type="text" id="new-url" class="add-input" placeholder="رابط البث (m3u8 أو Iframe)...">
+                    <button class="btn-save" onclick="addNewChannel()">حفظ القناة</button>
+                    <button class="btn-close-slider" onclick="toggleSlider(event)"><i class='bx bx-x'></i></button>
+                </div>
+            </div>
+
+            <!-- حاوية البث -->
+            <div id="player-wrapper">
+                <div id="jwplayer-container">
+                    <div id="jw-element"></div>
+                    <iframe id="live-iframe" allowfullscreen></iframe>
+                </div>
+            </div>
+        </main>
     </div>
 
-    <!-- مكتبة مشغل JW Player الموثوقة -->
+    <!-- مكتبة مشغل JW Player -->
     <script src="https://cdn.jwplayer.com/libraries/IDzF9Zmk.js"></script>
 
     <script>
@@ -518,30 +532,46 @@
             { name: "Bein News", url: "http://aumaletv.com:8080/live/Lfabor2024/Lfabor2024/47816.m3u8", isDefault: true }
         ];
 
-        // مزامنة البيانات مع التخزين المحلي لضمان عدم ضياع القنوات عند تحديث الموقع
         let channels = JSON.parse(localStorage.getItem('my_channels_v3')) || defaultChannels;
         
         let activeUrl = null;
         const jwElement = document.getElementById('jw-element');
         const iframeElement = document.getElementById('live-iframe');
         const slider = document.getElementById('add-slider');
+        const contentArea = document.getElementById('content');
 
-        function toggleSlider() {
+        // تبديل ظهور لوحة إضافة القناة مع الحفاظ على وضوح زر الإضافة
+        function toggleSlider(event) {
+            if (event) event.stopPropagation(); // منع انتقال النقر إلى مشغل الفيديو
+            
             slider.classList.toggle('show');
+            if (slider.classList.contains('show')) {
+                contentArea.classList.add('show-controls');
+            } else {
+                contentArea.classList.remove('show-controls');
+            }
         }
 
-        // معالجة تشغيل القناة
+        // تفعيل تظهير وإخفاء زر الإضافة عند النقر/اللمس على المشغل
+        contentArea.addEventListener('click', (e) => {
+            // تجاهل الحدث إذا تم النقر على الزر نفسه أو داخل حقول إدخال البيانات في السلايدر
+            if (e.target.closest('.toggle-add-btn') || e.target.closest('#add-slider')) {
+                return;
+            }
+            contentArea.classList.toggle('show-controls');
+        });
+
+        // تشغيل البث
         function playChannel(url, element) {
             slider.classList.remove('show');
+            contentArea.classList.remove('show-controls');
             activeUrl = url;
             
-            // إزالة وتعيين الحالة النشطة بصرياً
             document.querySelectorAll('.channel-item').forEach(item => item.classList.remove('active'));
             if (element) {
                 element.classList.add('active');
             }
 
-            // تحديد المشغل المناسب للرابط تلقائياً
             if (url.includes('m3u8')) {
                 iframeElement.style.display = 'none';
                 jwElement.style.display = 'block';
@@ -560,14 +590,13 @@
             }
         }
 
-        // توليد قائمة القنوات ودعم فلترة البحث والحذف
+        // بناء قائمة القنوات
         function renderChannels() {
             const list = document.getElementById('channels-list');
             const searchQuery = document.getElementById('search-input').value.trim().toLowerCase();
             list.innerHTML = '';
 
             channels.forEach((ch, index) => {
-                // تصفية نتائج البحث
                 if (searchQuery && !ch.name.toLowerCase().includes(searchQuery)) {
                     return;
                 }
@@ -583,14 +612,13 @@
                 infoDiv.innerHTML = `<i class='bx bx-play-circle'></i> <span>${ch.name}</span>`;
                 li.appendChild(infoDiv);
 
-                // إظهار زر حذف فقط للقنوات التي أضافها المستخدم بنفسه
                 if (!ch.isDefault) {
                     const deleteBtn = document.createElement('button');
                     deleteBtn.className = 'btn-delete';
                     deleteBtn.innerHTML = `<i class='bx bx-trash'></i>`;
                     deleteBtn.title = "حذف القناة";
                     deleteBtn.onclick = (e) => {
-                        e.stopPropagation(); // منع تشغيل القناة عند محاولة الضغط على زر الحذف
+                        e.stopPropagation(); 
                         deleteChannel(index);
                     };
                     li.appendChild(deleteBtn);
@@ -608,7 +636,7 @@
             }
         }
 
-        // إضافة وحفظ قناة جديدة في المتصفح
+        // إضافة قناة جديدة
         function addNewChannel() {
             const nameInput = document.getElementById('new-name');
             const urlInput = document.getElementById('new-url');
@@ -633,7 +661,7 @@
             }
         }
 
-        // حذف قناة مخصصة مضافة سابقاً
+        // حذف قناة مخصصة
         function deleteChannel(index) {
             if (confirm(`هل أنت متأكد من رغبتك في حذف القناة "${channels[index].name}"؟`)) {
                 const wasActive = (channels[index].url === activeUrl);
