@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>X-STREAM | TV Dashboard</title>
+    <title>SAMBADE | TV Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -100,7 +100,7 @@
         video { 
             width: 100%; 
             height: 100%; 
-            object-fit: contain; /* الحفاظ على نسبة العرض الأصلية 16:9 على التلفاز */
+            object-fit: fill; /* الحفاظ على نسبة العرض الأصلية 16:9 على التلفاز */
         }
 
         .player-placeholder {
@@ -279,7 +279,7 @@
         <!-- القسم الأيمن: الترويسة وقائمة القنوات -->
         <div id="right-pane">
             <header>
-                <h1><div class="logo-x"></div> X-STREAM</h1>
+                <h1><div class="logo-S"></div> SAMBADE-TV</h1>
                 <div class="search-container">
                     <input type="text" id="search-input" placeholder="SEARCH FREQUENCY..." autocomplete="off">
                 </div>
