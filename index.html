@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>X-STREAM | Suggestions</title>
+    <title>X-STREAM | TV Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -26,13 +26,9 @@
             color: var(--xbox-green);
             font-family: 'Share Tech Mono', monospace;
             overflow: hidden;
-            height: 100dvh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            max-width: 600px;
-            margin: 0 auto;
-            border-left: 1px solid #111;
-            border-right: 1px solid #111;
         }
 
         /* --- BACKGROUND --- */
@@ -49,32 +45,51 @@
             background-size: 100% 4px;
             pointer-events: none;
             z-index: 9999;
-            opacity: 0.3;
+            opacity: 0.2;
         }
         @keyframes pulse { 0% { opacity: 0.8; } 100% { opacity: 1; } }
 
-        /* --- LAYOUT CONTAINER --- */
+        /* --- TV SPLIT CONTAINER --- */
         #app {
+            display: flex;
+            flex-direction: row; /* توزيع أفقي مخصص للشاشات الكبيرة والتلفزيون */
+            height: 100vh;
+            width: 100vw;
+            z-index: 10;
+            overflow: hidden;
+        }
+
+        /* العمود الأيسر: مشغل الفيديو بالكامل */
+        #left-pane {
+            flex: 7; /* يستحوذ على 70% من مساحة الشاشة */
+            display: flex;
+            flex-direction: column;
+            background: #000;
+            border-right: 2px solid rgba(57, 255, 20, 0.3);
+            height: 100%;
+        }
+
+        /* العمود الأيمن: قائمة القنوات والبحث والتبويبات */
+        #right-pane {
+            flex: 3; /* يستحوذ على 30% من مساحة الشاشة */
+            display: flex;
+            flex-direction: column;
+            background: rgba(0, 0, 0, 0.85);
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* تنسيقات المشغل */
+        #player-section {
             display: flex;
             flex-direction: column;
             height: 100%;
             width: 100%;
-            z-index: 10;
-        }
-
-        /* 1. PLAYER SECTION (TOP) */
-        #player-section {
-            flex-shrink: 0;
-            background: #000;
-            width: 100%;
-            position: relative;
-            z-index: 20;
-            border-bottom: 1px solid var(--xbox-green);
         }
 
         .player-wrapper {
+            flex: 1;
             width: 100%;
-            aspect-ratio: 16/9;
             background: #000;
             position: relative;
             display: flex;
@@ -82,7 +97,11 @@
             justify-content: center;
         }
 
-        video { width: 100%; height: 100%; object-fit: contain; }
+        video { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; /* الحفاظ على نسبة العرض الأصلية 16:9 على التلفاز */
+        }
 
         .player-placeholder {
             position: absolute; color: var(--xbox-green);
@@ -90,36 +109,50 @@
         }
 
         .player-controls {
-            padding: 8px 12px;
+            padding: 15px 20px;
             background: var(--xbox-panel);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.8rem;
-            border-bottom: 1px solid rgba(57, 255, 20, 0.2);
+            border-top: 1px solid rgba(57, 255, 20, 0.2);
         }
 
-        /* 2. HEADER */
+        #info-title {
+            font-size: 1.3rem; /* تكبير الخط للتلفزيون */
+            font-family: 'Orbitron', sans-serif;
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+            color: #fff;
+        }
+
+        #connection-status {
+            color: #666; 
+            font-size: 0.9rem; 
+            white-space: nowrap;
+            letter-spacing: 1px;
+        }
+
+        /* تنسيقات الترويسة والبحث */
         header {
             flex-shrink: 0;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px 12px;
-            background: rgba(0, 0, 0, 0.8);
+            flex-direction: column;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
             border-bottom: 1px solid rgba(57, 255, 20, 0.3);
-            gap: 10px;
+            gap: 15px;
         }
 
         h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
+            font-size: 1.4rem;
             margin: 0;
-            display: flex; align-items: center; gap: 8px;
+            display: flex; align-items: center; gap: 10px;
             color: #fff;
         }
         .logo-x {
-            width: 20px; height: 20px;
+            width: 24px; height: 24px;
             border: 2px solid var(--xbox-green);
             border-radius: 50%; position: relative;
         }
@@ -129,34 +162,40 @@
         }
         .logo-x::before { width: 70%; height: 2px; } .logo-x::after { height: 70%; width: 2px; }
 
-        .search-container { flex: 1; display: flex; }
+        .search-container { width: 100%; display: flex; }
         #search-input {
             width: 100%;
             background: rgba(0, 0, 0, 0.5);
             border: 1px solid #333;
             color: var(--xbox-green);
-            padding: 6px 10px;
+            padding: 12px 15px;
             font-family: 'Share Tech Mono';
-            font-size: 16px;
-            border-radius: 4px;
+            font-size: 1.1rem; /* تكبير حقل البحث ليكون واضحاً عن بُعد */
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        #search-input:focus {
+            border-color: var(--xbox-green);
+            box-shadow: var(--glow);
         }
 
-        /* 3. LIST SECTION */
+        /* تنسيقات قائمة القنوات والتبويبات */
         #list-section {
             flex: 1;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            background: rgba(0, 0, 0, 0.6);
         }
 
         .list-tabs { display: flex; background: #000; }
         .tab-btn {
-            flex: 1; padding: 12px;
+            flex: 1; padding: 15px;
             background: transparent; color: #666;
             border: none; border-bottom: 2px solid transparent;
-            font-family: 'Orbitron'; font-size: 0.75rem;
+            font-family: 'Orbitron'; font-size: 0.9rem;
             cursor: pointer; letter-spacing: 1px;
+            transition: all 0.2s;
         }
         .tab-btn.active {
             color: var(--xbox-green); border-bottom-color: var(--xbox-green);
@@ -167,31 +206,34 @@
             flex: 1;
             overflow-y: auto;
             padding: 0; margin: 0; list-style: none;
-            -webkit-overflow-scrolling: touch;
         }
 
+        /* تحسين مسافات وحجم عناصر القنوات لتناسب المشاهدة من مسافة البعيدة */
         .channel-item {
-            padding: 12px 15px;
+            padding: 15px 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex; align-items: center; gap: 10px;
+            display: flex; align-items: center; gap: 15px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s;
         }
-        .channel-item:hover { background: rgba(57, 255, 20, 0.05); }
+        .channel-item:hover { 
+            background: rgba(57, 255, 20, 0.1); 
+        }
         .channel-item.active {
             background: rgba(57, 255, 20, 0.2);
-            border-left: 3px solid var(--xbox-green);
+            border-left: 4px solid var(--xbox-green);
         }
         .channel-logo {
-            width: 36px; height: 36px; object-fit: contain;
-            background: #111; border-radius: 4px; flex-shrink: 0;
+            width: 44px; height: 44px; object-fit: contain;
+            background: #111; border-radius: 6px; flex-shrink: 0;
         }
-        .channel-info div:first-child { font-weight: bold; font-size: 0.95rem; margin-bottom: 2px; }
-        .channel-info div:last-child { font-size: 0.7rem; color: #888; }
+        .channel-info div:first-child { font-weight: bold; font-size: 1.1rem; margin-bottom: 4px; }
+        .channel-info div:last-child { font-size: 0.8rem; color: #888; }
 
         .load-more {
-            width: 100%; padding: 15px; background: transparent;
+            width: 100%; padding: 20px; background: transparent;
             color: var(--xbox-green); border: none; font-family: 'Share Tech Mono';
+            font-size: 1rem; cursor: pointer;
         }
 
         /* LOADING */
@@ -200,8 +242,8 @@
             display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
         .spinner {
-            width: 50px; height: 50px; border: 4px solid #111;
-            border-top: 4px solid var(--xbox-green); border-radius: 50%;
+            width: 60px; height: 60px; border: 5px solid #111;
+            border-top: 5px solid var(--xbox-green); border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
@@ -214,54 +256,55 @@
 
     <div id="loading-overlay">
         <div class="spinner"></div>
-        <div style="margin-top: 15px; font-size: 0.8rem; letter-spacing: 2px;">SYSTEM BOOT</div>
+        <div style="margin-top: 20px; font-size: 1rem; letter-spacing: 3px; font-family: 'Orbitron';">TV SYSTEM BOOT</div>
     </div>
 
     <div id="app">
-        <!-- PLAYER -->
-        <section id="player-section">
-            <div class="player-wrapper">
-                <div class="player-placeholder" id="placeholder-text">
-                    <i class="fas fa-satellite-dish fa-2x"></i>
+        <!-- القسم الأيسر: المشغل فقط -->
+        <div id="left-pane">
+            <section id="player-section">
+                <div class="player-wrapper">
+                    <div class="player-placeholder" id="placeholder-text"></div>
+                    <video id="video-player" controls crossorigin="anonymous" playsinline></video>
                 </div>
-                <video id="video-player" controls crossorigin="anonymous" playsinline></video>
-            </div>
-            <div class="player-controls">
-                <div style="overflow: hidden; margin-right: 10px;">
-                    <div id="info-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff;">NO SIGNAL</div>
+                <div class="player-controls">
+                    <div style="overflow: hidden; margin-right: 15px; flex: 1;">
+                        <div id="info-title">NO SIGNAL</div>
+                    </div>
+                    <div id="connection-status">IDLE</div>
                 </div>
-                <div id="connection-status" style="color: #666; font-size: 0.7rem; white-space: nowrap;">IDLE</div>
-            </div>
-        </section>
+            </section>
+        </div>
 
-        <!-- HEADER -->
-        <header>
-            <h1><div class="logo-x"></div> X-STREAM</h1>
-            <div class="search-container">
-                <input type="text" id="search-input" placeholder="SEARCH FREQUENCY..." autocomplete="off">
-            </div>
-        </header>
+        <!-- القسم الأيمن: الترويسة وقائمة القنوات -->
+        <div id="right-pane">
+            <header>
+                <h1><div class="logo-x"></div> X-STREAM</h1>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="SEARCH FREQUENCY..." autocomplete="off">
+                </div>
+            </header>
 
-        <!-- LIST -->
-        <section id="list-section">
-            <div class="list-tabs">
-                <button class="tab-btn active" id="btn-all" onclick="applyFilter('all')">ALL</button>
-                <button class="tab-btn" id="btn-suggestions" onclick="applyFilter('suggestions')">SUGGESTIONS</button>
-            </div>
-            <div style="padding: 5px 10px; font-size: 0.7rem; color: #555; background: #0a0a0a; border-bottom: 1px solid #111;">
-                AVAILABLE STREAMS: <span id="channel-count">0</span>
-            </div>
-            <ul id="channel-list">
-                <!-- Channels populated by JS -->
-            </ul>
-        </section>
+            <section id="list-section">
+                <div class="list-tabs">
+                    <button class="tab-btn active" id="btn-all" onclick="applyFilter('all')">ALL</button>
+                    <button class="tab-btn" id="btn-suggestions" onclick="applyFilter('suggestions')">SUGGESTIONS</button>
+                </div>
+                <div style="padding: 10px 20px; font-size: 0.8rem; color: #555; background: #0a0a0a; border-bottom: 1px solid #111;">
+                    AVAILABLE STREAMS: <span id="channel-count">0</span>
+                </div>
+                <ul id="channel-list">
+                    <!-- Channels populated by JS -->
+                </ul>
+            </section>
+        </div>
     </div>
 
     <script>
         const M3U_URL = 'https://iptv-org.github.io/iptv/index.m3u';
         const PAGE_SIZE = 50;
         
-        // Exact names list from user request
+        // قائمة الاقتراحات المطلوبة
         const SUGGESTED_NAMES_RAW = [
             "ABC 7 Denver CO (KMGH) (720p)",
             "AfroLandTV (1080p)",
@@ -520,7 +563,6 @@
             "FX"
         ];
         
-        // Remove duplicates and create a Set for fast lookup
         const SUGGESTED_SET = new Set(SUGGESTED_NAMES_RAW);
 
         let allChannels = [], filteredChannels = [], visibleLimit = PAGE_SIZE;
@@ -565,7 +607,7 @@
                 renderList();
                 loadingOverlay.style.display = 'none';
 
-                // AUTO PLAY first suggestion or random
+                // تشغيل تلقائي لأول قناة مقترحة
                 setTimeout(() => {
                     const suggestions = allChannels.filter(c => SUGGESTED_SET.has(c.name));
                     const play = suggestions.length ? suggestions[0] : allChannels[0];
@@ -579,12 +621,10 @@
         }
 
         window.loadChannel = function(url, name) {
-            window.scrollTo(0,0);
             if(connectionTimeout) clearTimeout(connectionTimeout);
             
             document.getElementById('info-title').textContent = name;
             document.getElementById('connection-status').textContent = "CONNECTING...";
-            document.getElementById('placeholder-text').style.display = 'none';
             document.getElementById('connection-status').style.color = "yellow";
 
             if (hls) { hls.destroy(); hls = null; }
@@ -618,6 +658,20 @@
             };
         };
 
+        // دالة التحقق من القنوات الرياضية باللغة الإنجليزية للفلترة الفورية
+        function isEnglishSports(c) {
+            const name = c.name ? c.name.toLowerCase() : '';
+            const group = c.group ? c.group.toLowerCase() : '';
+            
+            const sportsKeywords = ['sport', 'sports', 'football', 'soccer', 'espn', 'arena', 'fc', 'golf', 'racing', 'fight', 'wwe', 'ufc', 'athletics'];
+            const isSport = sportsKeywords.some(keyword => name.includes(keyword) || group.includes(keyword));
+            
+            const isEnglish = c.lang === 'eng' || c.lang === 'en' || c.country === 'US' || c.country === 'GB' || c.country === 'CA' || 
+                              (!c.lang && !name.match(/[\u0600-\u06FF]/) && !name.includes('español') && !name.includes('latino'));
+                              
+            return isSport && isEnglish;
+        }
+
         window.applyFilter = function(mode) {
             currentFilterMode = mode;
             visibleLimit = PAGE_SIZE;
@@ -627,8 +681,19 @@
             if (mode === 'all') {
                 filteredChannels = allChannels;
             } else if (mode === 'suggestions') {
-                // Filter matches against the predefined set
-                filteredChannels = allChannels.filter(c => SUGGESTED_SET.has(c.name));
+                let suggestions = allChannels.filter(c => SUGGESTED_SET.has(c.name));
+                
+                // الترتيب لإبراز الرياضة الإنجليزية في البداية أولاً
+                suggestions.sort((a, b) => {
+                    const aIsSport = isEnglishSports(a);
+                    const bIsSport = isEnglishSports(b);
+                    
+                    if (aIsSport && !bIsSport) return -1;
+                    if (!aIsSport && bIsSport) return 1;
+                    return a.name.localeCompare(b.name);
+                });
+                
+                filteredChannels = suggestions;
             }
             renderList();
         };
@@ -668,7 +733,6 @@
             visibleLimit = PAGE_SIZE;
             if(!val) return applyFilter(currentFilterMode);
             
-            // Search within the current mode (All or Suggestions)
             const source = currentFilterMode === 'suggestions' ? allChannels.filter(c => SUGGESTED_SET.has(c.name)) : allChannels;
             
             filteredChannels = source.filter(c => c.name.toLowerCase().includes(val) || c.group.toLowerCase().includes(val));
